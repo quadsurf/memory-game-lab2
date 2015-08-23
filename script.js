@@ -5,7 +5,6 @@ var colors = [];
 var tiles = [];
 
 function checkClick(){
-  console.log(this);
   if(!isFirstClicked && !isSecondClicked){
     firstClicked = this;
     firstClicked.style.backgroundColor = firstClicked.getAttribute("data-answer");
@@ -14,10 +13,12 @@ function checkClick(){
   else if(isFirstClicked && !isSecondClicked){
     secondClicked = this;
     secondClicked.style.backgroundColor = secondClicked.getAttribute("data-answer");
-    isSecondClicked = true;
-    setTimeout(function(){
+    if (firstClicked !== secondClicked) {
+      isSecondClicked = true;
+      setTimeout(function(){
       check(firstClicked,secondClicked);
     },300);
+    }
   }
 }
 
