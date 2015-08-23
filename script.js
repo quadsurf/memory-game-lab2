@@ -65,9 +65,9 @@ function createGameBoard(){
 
 function addTilesToGameBoard(){
   var tiles = _.shuffle(createGameBoard());
-  for(var i =0; i < tiles.length; i++){
-    document.querySelector(".container").appendChild(tiles[i]);
-  }
+  tiles.forEach(function(tile){
+    document.querySelector(".container").appendChild(tile);
+  });
 }
 
 function createColorsArray(){
