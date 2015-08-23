@@ -13,11 +13,11 @@ function checkClick(){
   else if(isFirstClicked && !isSecondClicked){
     secondClicked = this;
     secondClicked.style.backgroundColor = secondClicked.getAttribute("data-answer");
-    if (firstClicked !== secondClicked) {
-      isSecondClicked = true;
-      setTimeout(function(){
-      check(firstClicked,secondClicked);
-    },300);
+      if (firstClicked !== secondClicked) {
+        isSecondClicked = true;
+        setTimeout(function(){
+        check(firstClicked,secondClicked);
+      },300);
     }
   }
 }
