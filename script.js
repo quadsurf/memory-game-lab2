@@ -5,7 +5,11 @@ var images = ['https://media.giphy.com/media/Q5wEEjz5qx5rG/giphy.gif',
   'https://media.giphy.com/media/l2JIgsp6LqBDyUg48/giphy.gif',
   'https://media.giphy.com/media/kUZcvqvOKkTi8/giphy.gif',
   'https://media.giphy.com/media/rJ0w60oeJ3Im4/giphy.gif',
-  'https://media.giphy.com/media/3oEdv0JkrzHA438Biw/giphy.gif']
+  'https://media.giphy.com/media/3oEdv0JkrzHA438Biw/giphy.gif',
+  'https://media.giphy.com/media/gaUh1r5mhz3Fe/giphy.gif',
+  'https://media.giphy.com/media/cSozWbWHEfUis/giphy.gif',
+  'https://media.giphy.com/media/kS2qLKwGk3MXe/giphy.gif',
+  'https://media.giphy.com/media/Rt0vHXcmEbnMs/giphy.gif']
 
 var firstClicked;
 var secondClicked;
@@ -50,7 +54,8 @@ function reset() {
 }
 
 function addImagesToGameBoard() {
-  var sixteenImages = _.shuffle(images.concat(images));
+  var eightImages = _.shuffle(images).splice(0, 8);
+  var sixteenImages = _.shuffle(eightImages.concat(eightImages));
   sixteenImages.forEach(function(imageSrc,idx){
     var elem = document.querySelectorAll(".gameTile")[idx];
     elem.dataset.src = imageSrc;
