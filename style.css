@@ -10,17 +10,19 @@ h1 {
 }
 
 .container{
-  width:600px;
-  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 50px;
   display: block;
 }
 
 .gameTile {
+  box-sizing: border-box;
   border: 1px solid black;
   background: lightblue;
   float: left;
   height: 150px;
-  width: 150px;
+  width: 25%;
   background-size: cover;
   background-position: center;
   position: relative;
