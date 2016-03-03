@@ -15,8 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/spec.js',
-      'script.js'
+      'script.js',
+      'test/spec.js'
     ],
 
 
@@ -67,7 +67,6 @@ module.exports = function(config) {
         'karma-chai',
         'karma-mocha-reporter',
         'karma-chrome-launcher',
-        'karma-phantomjs-launcher'
     ],
 
     // Concurrency level
