@@ -1,70 +1,66 @@
-var firstClicked, secondClicked;
-var isFirstClicked = false;
-var isSecondClicked = false;
-var imageSrcs = [];
-var tiles = [];
+var images = ['https://media.giphy.com/media/Q5wEEjz5qx5rG/giphy.gif',
+  'https://media.giphy.com/media/3o6gbaGOfsCs5wP5pm/giphy.gif',
+  'https://media.giphy.com/media/5fMlYckytHM4g/giphy.gif',
+  'https://media.giphy.com/media/l2JIij23SkdnTjQkw/giphy.gif',
+  'https://media.giphy.com/media/l2JIgsp6LqBDyUg48/giphy.gif',
+  'https://media.giphy.com/media/kUZcvqvOKkTi8/giphy.gif',
+  'https://media.giphy.com/media/rJ0w60oeJ3Im4/giphy.gif',
+  'https://media.giphy.com/media/3oEdv0JkrzHA438Biw/giphy.gif']
 
-function checkClick(){
-  if(!isFirstClicked && !isSecondClicked){
-    firstClicked = this;
-    firstClicked.classList.toggle('flipped');
-    isFirstClicked = true;
-  }
-  else if(isFirstClicked && !isSecondClicked){
-    secondClicked = this;
-      if (firstClicked !== secondClicked) {
-        secondClicked.classList.toggle('flipped');
-        isSecondClicked = true;
-        setTimeout(function(){
-        check(firstClicked,secondClicked);
-      },900);
+var firstClicked;
+var secondClicked;
+var matches = 0;
+
+function checkClick() {
+  if (!this.style.backgroundImage) {
+    if (!firstClicked) {
+      firstClicked = this;
+    } else if (!secondClicked) {
+      secondClicked = this;
+      if (firstClicked.dataset.src === secondClicked.dataset.src) {
+        firstClicked = null;
+        secondClicked = null;
+        matches += 1;
+        if (matches == 8) {
+          youWon();
+        }
+      } else {
+        window.setTimeout(function() {
+          firstClicked.style.backgroundImage = '';
+          secondClicked.style.backgroundImage = '';
+          firstClicked = null;
+          secondClicked = null;
+        }, 750);
+      }
     }
+    this.style.backgroundImage = 'url(' + this.dataset.src + ')';
   }
 }
 
-function check(a,b){
-  var answerA = a.querySelector('img').src.split('whiskey')[1][0];
-  var answerB = b.querySelector('img').src.split('whiskey')[1][0];
-  if (answerA === answerB){
-    a.removeEventListener("click", checkClick);
-    b.removeEventListener("click", checkClick);
-    reset();
-  }
-  else {
-    reset();
-    a.classList.toggle('flipped');
-    b.classList.toggle('flipped');
-  }
-
+function youWon() {
+  document.querySelector('.winner').style.display = 'block';
 }
 
-function reset(){
-  isFirstClicked = false;
-  isSecondClicked = false;
+function reset() {
   firstClicked = null;
   secondClicked = null;
+  matches = 0;
+  addImagesToGameBoard();
+  document.querySelector('.winner').style.display = 'none';
 }
 
-function addImagesToGameBoard(){
-  var images = _.shuffle(createImgSrcs());
-  images.forEach(function(imageSrc,idx){
-    document.querySelectorAll("img")[idx].src = imageSrc;
+function addImagesToGameBoard() {
+  var sixteenImages = _.shuffle(images.concat(images));
+  sixteenImages.forEach(function(imageSrc,idx){
+    var elem = document.querySelectorAll(".gameTile")[idx];
+    elem.dataset.src = imageSrc;
+    elem.style.backgroundImage = '';
   });
 }
 
-function createImgSrcs(){
-  for (var i = 0; i < 8; i++) {
-    imageSrcs.push('assets/whiskey'+(i+1)+'.png');
-  }
-  return imageSrcs.concat(imageSrcs.slice());
-}
-
-function addResetListener(){
-  document.querySelector(".reset").addEventListener("click", resetBoard);
-}
-
-function resetBoard(){
-  window.location.reload();
+function addResetListener() {
+  document.querySelectorAll(".reset")[0].addEventListener("click", reset);
+  document.querySelectorAll(".reset")[1].addEventListener("click", reset);
 }
 
 function addTileListeners() {
