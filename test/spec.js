@@ -25,15 +25,15 @@ describe("MemoryGame", function() {
   var tiles;
 
   beforeEach(function() {
-    var container = document.createElement('div');
-    container.className = "container";
-    document.body.appendChild(container);
-    for (var i = 0; i < 16; i++) {
-      var tile = document.createElement('div');
-      container.appendChild(tile);
-    }
-    tiles = document.querySelectorAll('.container div');
-    createGameBoard();
+    // var container = document.createElement('div');
+    // container.className = "container";
+    // document.body.appendChild(container);
+    // for (var i = 0; i < 16; i++) {
+    //   var tile = document.createElement('div');
+    //   container.appendChild(tile);
+    // }
+    // tiles = document.querySelectorAll('.container div');
+    // createGameBoard();
   });
 
   describe("initial setup", function() {
