@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.js',
       'script.js',
       'test/spec.js'
     ],

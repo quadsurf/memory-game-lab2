@@ -1,39 +1,45 @@
-function createGameBoard(){
-   var tiles = document.querySelectorAll(".container div");
-   for (var i = 0; i < tiles.length; i++) {
-     if(i < 8){
-       tiles[i].setAttribute("data-answer",i);
-     } else {
-       tiles[i].setAttribute("data-answer",i-8);
-     }
-     // tiles[i].addEventListener("click", checkClick);
-   }
-   return tiles;
-}
-
-function flippedTileCount() {
-  var tiles = document.querySelectorAll(".conatiner div");
-  var count = 0;
-  for (var i = 0; i < tiles.length; i++) {
-    if (tiles[i].style.backgroundImage) { count++; }
-  }
-  return count;
-}
-
 describe("MemoryGame", function() {
 
   var tiles;
+  var container;
+  var countDown;
+
+  function flippedTileCount() {
+    var count = 0;
+    for (var i = 0; i < tiles.length; i++) {
+      if (tiles[i].style.backgroundImage) { count++; }
+    }
+    return count;
+  }
 
   beforeEach(function() {
-    // var container = document.createElement('div');
-    // container.className = "container";
-    // document.body.appendChild(container);
-    // for (var i = 0; i < 16; i++) {
-    //   var tile = document.createElement('div');
-    //   container.appendChild(tile);
-    // }
-    // tiles = document.querySelectorAll('.container div');
-    // createGameBoard();
+    container = document.createElement('div');
+    container.className = "container";
+    
+    // add game tiles
+    document.body.appendChild(container);
+    for (var i = 0; i < 16; i++) {
+      var tile = document.createElement('div');
+      container.appendChild(tile);
+    }
+    tiles = document.querySelectorAll('.container div');
+    
+    // add reset button
+    var button = document.createElement('button');
+    button.id = "reset";
+    container.appendChild(button);
+    
+    // add hidden winner div
+    var winner = document.createElement('div');
+    winner.id = "winner";
+    container.appendChild(winner);
+
+    // initialize the game
+    initialize();
+  });
+
+  afterEach(function() {
+    document.body.removeChild(container);
   });
 
   describe("initial setup", function() {
@@ -61,24 +67,16 @@ describe("MemoryGame", function() {
       tiles[0].click();
     });
 
-    afterEach(function() {
-      document.querySelector('button').click();
-    });
-
     it("should set a background image on the clicked tile", function() {
       expect(tiles[0].style.backgroundImage).to.not.be.empty;
     });
 
-    it("should not set a background image on the tile that was not clicked", function() {
-      for (var i = 1; i < tiles.length; i++) {
-        expect(flippedTileCount()).to.equal(1);
-      }
+    it("should not set a background image on tiles that were not clicked", function() {
+      expect(flippedTileCount()).to.equal(1);
     });
   });
 
   describe("clicking on a second tile", function() {
-
-    var countDown;
 
     beforeEach(function() {
       tiles[0].click();
@@ -87,7 +85,6 @@ describe("MemoryGame", function() {
 
     afterEach(function() {
       countDown.restore();
-      document.querySelector('button').click();
     });
 
     it("should set a background image only on both clicked tiles", function() {
@@ -117,7 +114,7 @@ describe("MemoryGame", function() {
     });
 
     it("should not trigger a match if the same card is clicked twice", function() {
-      tile[0].click();
+      tiles[0].click();
       countDown.tick(100);
       expect(flippedTileCount()).to.equal(1);
       countDown.tick(901);
@@ -128,14 +125,17 @@ describe("MemoryGame", function() {
 
   describe("end game", function() {
     it("should tell the player 'You win!'", function() {
+      countDown = sinon.useFakeTimers();
       var answers = Array.prototype.slice.call(tiles).map(function(tile) {
         return tile.dataset.answer;
       });
       for (var i = 0; i < 8; i++) {
         tiles[answers.indexOf(i.toString())].click();
         tiles[answers.lastIndexOf(i.toString())].click();
+        countDown.tick(2001);
       }
       expect(document.body.innerText).to.contain('You win!');
+      countDown.restore();
     });
   });
 

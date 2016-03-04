@@ -14,7 +14,6 @@ var images = [
   'https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/12393817_575365202620951_965839874_n.jpg',
   'https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/12545369_191849081168083_75297221_n.jpg'
 ];
-var winning = document.getElementById("winner");
 
 function checkClick(){
   if(!isFirstClicked && !isSecondClicked){
@@ -43,7 +42,7 @@ function check(a,b){
     reset();
     matches++;
     if (matches === 8) {
-      winning.innerText = "You win!"
+      document.getElementById("winner").innerText = "You win!"
     }
   }
   else {
@@ -82,6 +81,7 @@ function resetBoard(){
 function initialize(){
   createGameBoard();
   addResetListener();
+  reset();
 }
 
 window.onload = initialize;
