@@ -2,19 +2,22 @@
 
 You're going to create a Javascript memory game on a subject of your choice(web frameworks, dog breeds, etc.)  See the example gifs at the bottom of the page for inspiration.
 
-###The requirements
+### The requirements
 
 * The game must consist of at least 16 cards
+* When the user clicks on a card, the "back" of the card is revealed by setting the `background image` property on the card. What image to display should depend on the `data-answer` attribute on the card.
 * A user can click two cards each turn.  If they are a match, the cards stay overturned.  Otherwise, both cards flip back over.
-* A score display that shows how many matches a user has made
-* If the user matches all the cards, display a congratulations message
+* If the user matches all the cards, display a message saying "You win!"
 * A reset button which will restart the game and reset the cards
 * Style it.  Make it look nice.
-* Deploy it to Surge.
-* Add a link to your deployed app to the readme.md file.
+* Make all the tests pass!
 * Submit a link to your github repo
 
-###Bonus Features
+### Set up
+
+Fork and clone this repo. From the `memory-game-lab` directory, run `npm install`. Then run `npm test` and you should see the tests run. You know the drill: red, green, refactor!
+
+### Bonus Features
 * Add a card-flipping animation when the user clicks a card
 * Add a time limit.  If the time expires, show the user a game over screen.
 
