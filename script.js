@@ -1,8 +1,6 @@
 var firstClicked, secondClicked;
 var isFirstClicked = false;
 var isSecondClicked = false;
-var colors = [];
-var tiles = [];
 var matches = 0;
 var images = [
   'https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/12139772_1505254603125289_528760867_n.jpg',
