@@ -5,7 +5,7 @@ You're going to create a Javascript memory game on a subject of your choice(web 
 ### The requirements
 
 * The game must consist of at least 16 cards
-* When the user clicks on a card, the "back" of the card is revealed by setting the `background image` property on the card.
+* When the user clicks on a card, the "back" of the card is revealed by setting the `background image` property on the card. What image to display should depend on the `data-answer` attribute on the card.
 * A user can click two cards each turn.  If they are a match, the cards stay overturned.  Otherwise, both cards flip back over.
 * If the user matches all the cards, display a message saying "You win!"
 * A reset button which will restart the game and reset the cards
