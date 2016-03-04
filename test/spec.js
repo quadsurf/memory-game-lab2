@@ -47,13 +47,9 @@ describe("MemoryGame", function() {
       var answers = Array.prototype.slice.call(tiles).map(function(tile) {
         return tile.dataset.answer;
       });
+      expect(answers.filter(Boolean)).to.not.be.empty;
       expect(answers).to.not.deep.equal(['0','0','1','1','2','2','3','3','4','4','5','5','6','6','7','7']);
       expect(answers).to.not.deep.equal(['0','1','2','3','4','5','6','7','0','1','2','3','4','5','6','7']);
-    });
-
-    it("should have a reset button", function() {
-      var button = document.querySelector('button');
-      expect(button).to.not.be.null;
     });
 
     it("should not have a win message", function() {
@@ -149,6 +145,7 @@ describe("MemoryGame", function() {
       var answers = Array.prototype.slice.call(tiles).map(function(tile) {
         return tile.dataset.answer;
       });
+      expect(answers.filter(Boolean)).to.not.be.empty;
       expect(answers).to.not.deep.equal(['0','0','1','1','2','2','3','3','4','4','5','5','6','6','7','7']);
       expect(answers).to.not.deep.equal(['0','1','2','3','4','5','6','7','0','1','2','3','4','5','6','7']);
     });
@@ -157,5 +154,4 @@ describe("MemoryGame", function() {
       expect(flippedTileCount()).to.equal(0);
     });
   });
-
 });
