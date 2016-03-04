@@ -23,6 +23,16 @@ describe("MemoryGame", function() {
       container.appendChild(tile);
     }
     tiles = document.querySelectorAll('.container div');
+    
+    // add reset button
+    var button = document.createElement('button');
+    button.id = "reset";
+    container.appendChild(button);
+    
+    // add hidden winner div
+    var winner = document.createElement('div');
+    winner.id = "winner";
+    container.appendChild(winner);
 
     // initialize the game
     initialize();
@@ -40,11 +50,6 @@ describe("MemoryGame", function() {
       expect(answers.filter(Boolean)).to.not.be.empty;
       expect(answers).to.not.deep.equal(['0','0','1','1','2','2','3','3','4','4','5','5','6','6','7','7']);
       expect(answers).to.not.deep.equal(['0','1','2','3','4','5','6','7','0','1','2','3','4','5','6','7']);
-    });
-
-    it("should have a reset button", function() {
-      var button = document.querySelector('button');
-      expect(button).to.not.be.null;
     });
 
     it("should not have a win message", function() {
@@ -116,11 +121,6 @@ describe("MemoryGame", function() {
 
   describe("end game", function() {
     it("should tell the player 'You win!'", function() {
-
-      var winner = document.createElement('div');
-      winner.id = "winner";
-      container.appendChild(winner);
-
       countDown = sinon.useFakeTimers();
       var answers = Array.prototype.slice.call(tiles).map(function(tile) {
         return tile.dataset.answer;
@@ -138,15 +138,7 @@ describe("MemoryGame", function() {
   describe("reset", function() {
 
     beforeEach(function() {
-      var button = document.createElement('button');
-      button.id = "reset";
-      container.appendChild(button);
-      button.click();
-    });
-
-    afterEach(function() {
-      var button = document.querySelector('button');
-      button.remove();
+      document.querySelector('button').click();
     });
 
     it("should shuffle the board", function() {
