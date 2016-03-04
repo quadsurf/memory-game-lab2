@@ -125,7 +125,7 @@ describe("MemoryGame", function() {
       var answers = Array.prototype.slice.call(tiles).map(function(tile) {
         return tile.dataset.answer;
       });
-      for (var i = 0; i < answers.length; i++) {
+      for (var i = 0; i < answers.length/2; i++) {
         tiles[answers.indexOf(i.toString())].click();
         tiles[answers.lastIndexOf(i.toString())].click();
         countDown.tick(2001);
