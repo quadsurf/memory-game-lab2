@@ -1,0 +1,10 @@
+.container {
+    width: 650px;
+}
+.container div {
+    height: 100px;
+    width: 160px;
+    border: 1px solid #666;
+    float: left;
+    background: #099086;
+}
